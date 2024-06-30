@@ -16,7 +16,7 @@ export default function NavLink({ href, label }: Props) {
       as={Link}
       href={href}
       isActive={pathname == href}
-      className="capitalize"
+      className="capitalize hover:text-yellow-300"
     >
       {label}
     </NavbarItem>

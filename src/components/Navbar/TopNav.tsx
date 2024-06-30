@@ -8,8 +8,11 @@ import {
 } from "@nextui-org/react";
 import { GiMatchTip } from "react-icons/gi";
 import NavLink from "./NavLink";
+import { auth } from "@/auth";
+import UserMenu from "./UserMenu";
 
-export default function TopNav() {
+export default async function TopNav() {
+  const session = await auth();
   return (
     <Navbar
       maxWidth="xl"
@@ -25,7 +28,7 @@ export default function TopNav() {
     >
       <NavbarBrand as={Link} href="/">
         <GiMatchTip size={40} className="text-gray-200" />
-        <div className="font-bold text-3xl flex">
+        <div className="font-bold text-xl md:text-3xl flex">
           <span className="text-gray-900">Next</span>
           <span className="text-gray-200">Match</span>
         </div>
@@ -36,22 +39,28 @@ export default function TopNav() {
         <NavLink href="/messages" label="messages" />
       </NavbarContent>
       <NavbarContent justify="end">
-        <Button
-          variant="bordered"
-          className="text-white"
-          as={Link}
-          href="/login"
-        >
-          Login
-        </Button>
-        <Button
-          variant="bordered"
-          className="text-white"
-          as={Link}
-          href="/register"
-        >
-          Register
-        </Button>
+        {session ? (
+          <UserMenu user={session.user} />
+        ) : (
+          <>
+            <Button
+              variant="bordered"
+              className="text-white"
+              as={Link}
+              href="/login"
+            >
+              Login
+            </Button>
+            <Button
+              variant="bordered"
+              className="text-white hidden md:flex"
+              as={Link}
+              href="/register"
+            >
+              Register
+            </Button>
+          </>
+        )}
       </NavbarContent>
     </Navbar>
   );
