@@ -2,22 +2,14 @@ import { getMemberByUserId } from "@/app/actions/memberActions";
 import { CardBody, CardHeader, Divider } from "@nextui-org/react";
 import { notFound } from "next/navigation";
 
-export default async function MemberDetailPage({
-  params,
-}: {
-  params: { userId: string };
-}) {
-  const member = await getMemberByUserId(params.userId);
-
-  if (!member) return notFound();
-
+export default function ChatPage() {
   return (
     <>
       <CardHeader className="text-2x; font-semibold text-secondary">
-        Profile
+        Chat
       </CardHeader>
       <Divider />
-      <CardBody>{member.description}</CardBody>
+      <CardBody>Chat go here</CardBody>
     </>
   );
 }

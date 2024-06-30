@@ -1,3 +1,5 @@
+"use client";
+
 import { calculateAge } from "@/lib/util";
 import {
   Button,
@@ -48,7 +50,7 @@ export default function MemberSidebar({ member }: Props) {
             <Link
               href={link.href}
               key={link.label}
-              className={`block rounded ${
+              className={`block rounded capitalize ${
                 pathname === link.href
                   ? "text-secondary"
                   : "hover:text-secondary/50"
